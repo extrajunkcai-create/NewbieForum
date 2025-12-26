@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Board</title>
+</head>
+<body>
+<style>
+    body {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 0 10px;
+    }
+    .container {
+        border: 2px solid #dedede;
+        background-color: #f1f1f1;
+        border-radius: 2px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .darker {
+        border-color: #ccc;
+        background-color: #ddd;
+    }
+    .container::after {
+        content:"";
+        clear: both;
+        display: table;
+    }
+    .time-right {
+        float: right;
+        color: #aaa;
+    }
+    .time-left {
+        float: left;
+        color: #999;
+    }
+</style>
+
+<section class="message-board">
+    <div class="title">
+        <h2>Message here</h2>
+    </div>
+    <textarea class="message" id="userinput"></textarea><br/><br/>
+    <button class="submit-btn">Submit</button>
+    <div class="display-area">
+        <strong>Comments:</strong>
+    </div>
+</section>
+
+<script>
+window.onload = function () {
+    var displayArea = document.querySelector(".display-area");
+    var btn = document.querySelector(".submit-btn");
+    var messageInput = document.querySelector(".message");
+
+    btn.onclick = function () {
+        var comment = messageInput.value.trim();
+
+        if (comment !== "") {
+            var div = document.createElement("div");
+            div.className = "container";
+
+            var p = document.createElement("p");
+            p.textContent = comment;
+
+            var time = document.createElement("span");
+            time.className = "time-right";
+            time.textContent = new Date().toLocaleTimeString();
+
+            div.appendChild(p);
+            div.appendChild(time);
+            displayArea.appendChild(div);
+
+            messageInput.value = "";
+        }
+    };
+};
+</script>
+</div>
+</body>
+</html>
